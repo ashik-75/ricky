@@ -1,7 +1,7 @@
 "use client";
 
 import { getListOfData } from "@/services/mortyApi";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import Filtering from "./Filtering";
 import LoadMore from "./LoadMore";
@@ -31,10 +31,6 @@ function AnFunc({ payload }: any) {
     },
     enabled: false,
   });
-
-  const queryClient = useQueryClient();
-
-  console.log("SHOWF: ", queryClient.getQueryData(["characters"]));
 
   useEffect(() => {
     const latestCharacter =

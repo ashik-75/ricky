@@ -10,10 +10,7 @@ import Episode from "./Episode";
 import Location from "./Location";
 
 const getSingleData = async (endpoint: string) => {
-  console.log({ endpoint });
   const response = await fetch(endpoint);
-
-  console.log(response.ok ? "OK" : "NOT", endpoint);
 
   if (!response.ok) {
     throw new Error("Something went wrong!");

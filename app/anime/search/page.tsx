@@ -8,21 +8,6 @@ import Filtering from "../Filtering";
 import LoadMore from "../LoadMore";
 import Characters from "../components/Characters";
 
-function convertToQuery(queryObject: any) {
-  const keys = Object.keys(queryObject);
-
-  let output = "";
-  for (let key of keys) {
-    if (keys.indexOf(key) === keys.length - 1) {
-      output += `${key}=${queryObject[key]}`;
-    } else {
-      output += `${key}=${queryObject[key]}&`;
-    }
-  }
-
-  return output;
-}
-
 function SearchPage() {
   const searchParams = useSearchParams();
   const queryString = `name=${searchParams.get(
