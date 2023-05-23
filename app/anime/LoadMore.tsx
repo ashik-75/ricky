@@ -20,7 +20,7 @@ function LoadMore({
         disabled={isFetchingNextPage}
       >
         <span>Load More</span>
-        <span>{isFetchingNextPage && <Spinner variant="btn" />}</span>
+        <span>{isFetchingNextPage && <Spinner color="white" />}</span>
       </button>
     </div>
   );

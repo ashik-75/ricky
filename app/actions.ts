@@ -1,44 +1,42 @@
 "use server";
-import kv from "@vercel/kv";
-import { revalidatePath } from "next/cache";
 
-export async function getRecipes() {
-  try {
-    const recipes = await kv.lrange("recipes", 0, -1);
+import prisma from "@/prisma/client";
+import { User } from "@prisma/client";
+import axios from "axios";
 
-    return recipes;
-  } catch (error) {
-    throw new Error("Something went wrong!");
-  }
+export async function addUser(user: User) {
+  const res = await prisma.user.create({
+    data: user,
+  });
+
+  return res;
 }
 
-export async function addRecipes(payload: FormData) {
-  try {
-    const data = await kv.lpush("recipes", {
-      title: payload.get("title"),
-      image: payload.get("image"),
-    });
+export async function getUsers(lastId?: number) {
+  const users = await axios.get(
+    `http://localhost:3000/api/users?cursor=${lastId}`
+  );
 
-    revalidatePath("/");
-
-    return data;
-  } catch (error) {
-    throw new Error("Something went wrong!");
-  }
+  return users.data;
 }
 
-export async function removeRecipe(title: string) {
-  try {
-    const rem = await kv.rpop("recipes");
+export async function deleteUser(email: string) {
+  const res = await prisma.user.delete({
+    where: {
+      email: email,
+    },
+  });
 
-    revalidatePath("/");
-
-    return rem;
-  } catch (error) {
-    throw new Error("Something went wrong!");
-  }
+  return res;
 }
 
-export async function justRevalidate() {
-  revalidatePath("/dashboard");
+export async function updateUser(payload: User) {
+  const res = await prisma.user.update({
+    where: {
+      email: payload.email,
+    },
+    data: payload,
+  });
+
+  return res;
 }

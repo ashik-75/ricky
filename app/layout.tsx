@@ -17,22 +17,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-800 text-slate-100`}>
-        <div className="max-w-7xl mx-auto">
-          <nav>
-            <ul className="flex gap-5 p-5 ">
-              <li>
-                <Link href={"/"}>Home</Link>
-              </li>
-              <li>
-                <Link href={"/anime"}>Anime</Link>
-              </li>
-            </ul>
-          </nav>
-          <main className="p-5">
-            <Provider>{children}</Provider>
-          </main>
-        </div>
+      <body className={`${inter.className}`}>
+        <Provider>
+          <div className="max-w-7xl mx-auto">
+            <nav>
+              <ul className="flex gap-5 p-5 ">
+                <li>
+                  <Link href={"/dashboard"}>Dashboard</Link>
+                </li>
+                <li>
+                  <Link href={"/movie"}>Movie</Link>
+                </li>
+                <li>
+                  <Link href={"/anime"}>Anime</Link>
+                </li>
+              </ul>
+            </nav>
+            <main className="p-5">{children}</main>
+          </div>
+        </Provider>
       </body>
     </html>
   );

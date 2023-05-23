@@ -1,9 +1,7 @@
-import Loader from "@/components/Loader/Loader";
-
 function loading() {
   return (
     <div>
-      <Loader />
+      <div>Loading ...</div>
     </div>
   );
 }
